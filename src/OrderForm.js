@@ -15,7 +15,10 @@ export default function OrderForm(props) {
         value={values.name}
       />
       <label>Pizza Size:</label>
-      <select name="size">
+      <select
+      onChange={onInputChange}
+      value={values.size}
+       name="size">
         <option value="placeholder">Choose Size</option>
         <option value="10">10 inch</option>
         <option value="14">14 inch</option>

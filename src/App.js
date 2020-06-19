@@ -45,19 +45,22 @@ const App = () => {
 
   const onCheckboxChange = (event) => {
     const {name, checked}= event.target;
-    setFormValues({ ...formValues, [name]: checked });
+    setFormValues({ ...formValues,
+      toppings:{...formValues.toppings, [name]: checked} 
+    });
   };
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
     const newPizza = {
-      name: formValues.name.trim(),
+      name: formValues.name,
       size: formValues.size,
       toppings: Object.keys(formValues.toppings)
        .filter(toppingName => (formValues.toppings[toppingName]===true)) ,
-      special: formValues.special.trim(),
+      special: formValues.special,
     }
     setPizza(newPizza)
+    console.log(newPizza)
   };
 
 
@@ -76,7 +79,7 @@ const App = () => {
         <Route path="/" exact component={() => <Order />} />
         <Route
           path="/pizza">
-          <OrderForm pizza={pizza} setPizza={setPizza} onInputChange={onInputChange} onSubmitHandler={onSubmitHandler} onCheckboxChange ={onCheckboxChange} values={formValues} />
+          <OrderForm pizza={pizza} setPizza={setPizza} onInputChange={onInputChange} onSubmitHandler={onSubmitHandler} onCheckboxChange ={onCheckboxChange} values={formValues} disabled={disabled}/>
         </Route>
       </div>
     </Router>
