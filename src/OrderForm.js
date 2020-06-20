@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
+import ThisPizza from './Pizza'
 // need to add a home button here as well that takes you to the homepage
 
 export default function OrderForm(props) {
-  const { pizza, setPizza, disabled, onInputChange,onSubmitHandler, onCheckboxChange, values } = props;
+  const {pizza, disabled, onInputChange,onSubmitHandler, onCheckboxChange, values } = props;
 
   return (
     <form onSubmit={onSubmitHandler}>
@@ -84,6 +85,17 @@ export default function OrderForm(props) {
         onChange={onInputChange}
       />
     <button disabled={disabled} type='submit'>Add to Order</button>
+
+    <div>
+      
+    {pizza.map(data => {
+        console.log(data)
+        return (
+          <ThisPizza key={data.id} details={data}/>
+        )
+      })}
+    </div>
     </form>
+
   );
 }

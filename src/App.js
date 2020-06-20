@@ -4,6 +4,8 @@ import Order from "./Order";
 import OrderForm from "./OrderForm";
 import formSchema from "./Validation";
 import * as yup from "yup";
+import axios from 'axios'
+
 
 const initialFormValues = {
   name: "",
@@ -19,10 +21,11 @@ const initialFormValues = {
 
 const initialDisabled = true;
 
+
 const App = () => {
   const [formValues, setFormValues] = useState([initialFormValues]);
-  console.log(formValues)
-  const [pizza, setPizza] = useState([]);
+  console.log(formValues);
+  const [pizza, setPizza]= useState([]);
   const [errorMessage, setError] = useState({});
   const [disabled, setDisabled] = useState(initialDisabled);
 
@@ -50,19 +53,50 @@ const App = () => {
     });
   };
 
+  const getPizza = () => {
+    axios.get('https://reqres.in/api/user')
+    .then(response => {
+      console.log(response)
+      setPizza(response.data[1].data)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+
+  }
+
+  const postPizza = (newPizza) => {
+    axios.post('https://reqres.in/api/user', newPizza)
+    .then(res => {
+      console.log(res.data)
+      setPizza([...pizza, res.data])
+    })
+    .catch(err => {
+      console.log(err)
+    })
+    .finally(() => {
+      setFormValues(initialFormValues)
+    })
+  }
+
   const onSubmitHandler = (event) => {
     event.preventDefault();
     const newPizza = {
       name: formValues.name,
       size: formValues.size,
       toppings: Object.keys(formValues.toppings)
+      
        .filter(toppingName => (formValues.toppings[toppingName]===true)) ,
       special: formValues.special,
     }
-    setPizza(newPizza)
+    postPizza(newPizza)
     console.log(newPizza)
+    console.log(pizza)
   };
-
+  
+  useEffect(() => {
+    getPizza()
+  }, [])
 
   useEffect(() => {
     
@@ -81,6 +115,14 @@ const App = () => {
           path="/pizza">
           <OrderForm pizza={pizza} setPizza={setPizza} onInputChange={onInputChange} onSubmitHandler={onSubmitHandler} onCheckboxChange ={onCheckboxChange} values={formValues} disabled={disabled}/>
         </Route>
+{/* 
+      {pizza.map(data => {
+        console.log(data)
+        return (
+          <ThisPizza key={data.id} details={data}/>
+        )
+      })} */}
+
       </div>
     </Router>
   );
