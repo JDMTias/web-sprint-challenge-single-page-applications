@@ -1,3 +1,5 @@
+import cy from 'cypress'
+
 describe('test text, toppings, and submit', () => {
     it('validate text input', ()=> {
         cy.visit('http://localhost:3000/pizza')

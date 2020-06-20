@@ -23,7 +23,7 @@ const initialDisabled = true;
 
 
 const App = () => {
-  const [formValues, setFormValues] = useState([initialFormValues]);
+  const [formValues, setFormValues] = useState(initialFormValues);
   console.log(formValues);
   const [pizza, setPizza]= useState([]);
   const [errorMessage, setError] = useState({});
@@ -115,14 +115,7 @@ const App = () => {
           path="/pizza">
           <OrderForm pizza={pizza} setPizza={setPizza} onInputChange={onInputChange} onSubmitHandler={onSubmitHandler} onCheckboxChange ={onCheckboxChange} values={formValues} disabled={disabled}/>
         </Route>
-{/* 
-      {pizza.map(data => {
-        console.log(data)
-        return (
-          <ThisPizza key={data.id} details={data}/>
-        )
-      })} */}
-
+        
       </div>
     </Router>
   );

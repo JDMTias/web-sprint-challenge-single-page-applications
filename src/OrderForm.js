@@ -33,7 +33,7 @@ export default function OrderForm(props) {
             name="goomba"
             type="checkbox"
             onChange={onCheckboxChange}
-            checked={values.goomba}
+            checked={values.toppings.goomba}
           />
         </label>
 
@@ -43,7 +43,7 @@ export default function OrderForm(props) {
             name="koopa"
             type="checkbox"
             onChange={onCheckboxChange}
-            checked={values.koopa}
+            checked={values.toppings.koopa}
           />
         </label>
 
@@ -53,7 +53,7 @@ export default function OrderForm(props) {
             name="blooper"
             type="checkbox"
             onChange={onCheckboxChange}
-            checked={values.blooper}
+            checked={values.toppings.blooper}
           />
         </label>
 
@@ -63,7 +63,7 @@ export default function OrderForm(props) {
             name="cheepcheep"
             type="checkbox"
             onChange={onCheckboxChange}
-            checked={values.cheepcheep}
+            checked={values.toppings.cheepcheep}
           />
         </label>
 
@@ -73,7 +73,7 @@ export default function OrderForm(props) {
             name="bowser"
             type="checkbox"
             onChange={onCheckboxChange}
-            checked={values.bowser}
+            checked={values.toppings.bowser}
           />
         </label>
       </div>
